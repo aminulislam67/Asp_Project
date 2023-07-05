@@ -14,7 +14,7 @@
             padding: 20px;
             border: 3px solid #ccc;
             border-radius: 8px;
-            box-shadow: 0px 0px 20px skyblue;
+            box-shadow: 0px 0px 30px skyblue;
             background-color: transparent
            
         }
@@ -97,7 +97,7 @@
         'Response.Write("DB Connected" & "<br>")
 
         ' Check for connection errors
-        If Err.Number <> 0 Then
+        If Err.Number <>  Then
             Response.Write "An error occurred while connecting to the database."
             Response.End
         End If
