@@ -20,6 +20,18 @@
     </style>
 </head>
 <body>
+
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+
+        <a class="navbar-brand font-weight-bold" href="#">Student Management System</a>
+        <div class="ml-auto">
+            <button type="button" class="btn btn-info mr-2">Register</button>
+            <button type="button" class="btn btn-success">Login</button>
+
+    </div>
+</nav>
+
+
     <div class="container">
         <h1>User Login</h1>
         <form id="loginForm" method="post" action="login.asp">

@@ -3,6 +3,8 @@
 <head>
     <title>User Registration</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
     <style>
         body {
             padding: 20px;
@@ -15,10 +17,23 @@
             border-radius: 8px;
             background-color: #f7f7f7;
             box-shadow: 0px 5px 10px skyblue;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
+
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+
+        <a class="navbar-brand font-weight-bold" href="#">Student Management System</a>
+        <div class="ml-auto">
+            <button type="button" class="btn btn-info mr-2">Register</button>
+            <button type="button" class="btn btn-success">Login</button>
+
+    </div>
+</nav>
+
+
     <div class="container">
         <h1>User Registration</h1>
         <form id="registrationForm" method="post" action="">
@@ -52,9 +67,9 @@
                     <option value="other">Other</option>
                 </select>
             </div>
-              <button type="submit" class="btn btn-info">Register</button><br>
+            <button type="submit" class="btn btn-success">Register</button><br>
             Already have an account?
-            <button type="button" class="btn btn-danger" onclick="location.href='Login.asp'">Login Here</button>
+            <button type="button" class="btn btn-danger" onclick="location.href='login.asp'">Login Here</button>
         </form>
     </div>
 
@@ -113,13 +128,8 @@
         conn.Close
         Set conn = Nothing
 
-        ' Display the submitted data
-        Response.Write("<h2>Registration Successful</h2>")
-        Response.Write("<p>First Name: " & firstName & "</p>")
-        Response.Write("<p>Last Name: " & lastName & "</p>")
-        Response.Write("<p>Email: " & email & "</p>")
-        Response.Write("<p>Phone: " & phone & "</p>")
-        Response.Write("<p>Gender: " & gender & "</p>")
+        ' Redirect to the login page
+        Response.Redirect "login.asp"
     End If
     %>
 </body>
