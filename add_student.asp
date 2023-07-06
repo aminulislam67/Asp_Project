@@ -138,7 +138,7 @@ If Request.ServerVariables("REQUEST_METHOD") = "POST" Then
         Set conn = Nothing
 
         ' Redirect to a success page or display a success message
-        Response.Write "Student added successfully!"
+        Response.Redirect "display.asp"
     End If
 End If
 %>

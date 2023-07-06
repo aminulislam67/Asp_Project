@@ -59,6 +59,7 @@
                     <th>Gender</th>
                     <th>Session</th>
                     <th>Date of Birth</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -118,6 +119,10 @@
                     Response.Write "<td>" & rsFetch("Gender") & "</td>"
                     Response.Write "<td>" & rsFetch("Session") & "</td>"
                     Response.Write "<td>" & rsFetch("DateOfBirth") & "</td>"
+                    Response.Write "<td>"
+                    Response.Write "<a href=""edit.asp?id=" & rsFetch("StudentID") & """ class=""btn btn-primary btn-sm mr-2"">Edit</a>"
+                    Response.Write "<a href=""display.asp?deleteid=" & rsFetch("StudentID") & """ class=""btn btn-danger btn-sm"" onclick=""return confirm('Are you sure you want to delete this student?');"">Delete</a>"
+                    Response.Write "</td>"
                     Response.Write "</tr>"
                     rsFetch.MoveNext
                 Loop
@@ -134,6 +139,58 @@
 </div>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<%
+' Handle delete operation
+Dim deleteID
+deleteID = Request.QueryString("deleteid")
+If deleteID <> "" Then
+    ' Path to the Access database file
+    Dim dbPathDelete
+    dbPathDelete = Server.MapPath("crud_db.accdb")
+
+    ' Connection string for Access database
+    Dim connStrDelete
+    connStrDelete = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & dbPathDelete & ";"
+
+    ' Create a new connection object
+    Dim connDelete
+    Set connDelete = Server.CreateObject("ADODB.Connection")
+
+    On Error Resume Next
+
+    ' Open the database connection
+    connDelete.Open connStrDelete
+
+    ' Check for connection errors
+    If Err.Number <> 0 Then
+        Response.Write "An error occurred while connecting to the database."
+        Response.End
+    End If
+
+    On Error Goto 0
+
+    ' Prepare the SQL statement to delete the student record
+    Dim strSQLDelete
+    strSQLDelete = "DELETE FROM [Students] WHERE [StudentID] = '" & Replace(deleteID, "'", "''") & "'"
+
+    ' Execute the SQL delete statement
+    connDelete.Execute strSQLDelete
+
+    ' Check for any errors during the delete operation
+    If Err.Number <> 0 Then
+        Response.Write "An error occurred while deleting the student record."
+        Response.End
+    End If
+
+    ' Close the database connection
+    connDelete.Close
+    Set connDelete = Nothing
+
+    ' Redirect to the display page
+Response.Redirect "display.asp"
+End If
+%>
 
 </body>
 </html>
