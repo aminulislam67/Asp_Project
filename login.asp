@@ -31,7 +31,7 @@
                 <label for="password">Password:</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button><br>
+            <button type="submit" class="btn btn-danger">Login</button><br>
             Don't have an account?
             <button type="button" class="btn btn-success" onclick="location.href='process_registration.asp'">Register</button>
         </form>
