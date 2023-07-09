@@ -52,6 +52,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Student ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
@@ -112,6 +113,7 @@
                 ' Loop through the resultset and display student data
                 Do Until rsFetch.EOF
                     Response.Write "<tr>"
+                    Response.Write "<td>" & rsFetch("ID") & "</td>"
                     Response.Write "<td>" & rsFetch("StudentID") & "</td>"
                     Response.Write "<td>" & rsFetch("FirstName") & "</td>"
                     Response.Write "<td>" & rsFetch("LastName") & "</td>"
@@ -120,8 +122,8 @@
                     Response.Write "<td>" & rsFetch("Session") & "</td>"
                     Response.Write "<td>" & rsFetch("DateOfBirth") & "</td>"
                     Response.Write "<td>"
-                    Response.Write "<a href=""edit.asp?id=" & rsFetch("StudentID") & """ class=""btn btn-primary btn-sm mr-2"">Edit</a>"
-                    Response.Write "<a href=""display.asp?deleteid=" & rsFetch("StudentID") & """ class=""btn btn-danger btn-sm"" onclick=""return confirm('Are you sure you want to delete this student?');"">Delete</a>"
+                    Response.Write "<a href=""edit.asp?id=" & rsFetch("ID") & """ class=""btn btn-primary btn-sm mr-2"">Edit</a>"
+                    Response.Write "<a href=""display.asp?deleteid=" & rsFetch("ID") & """ class=""btn btn-danger btn-sm"" onclick=""return confirm('Are you sure you want to delete this student?');"">Delete</a>"
                     Response.Write "</td>"
                     Response.Write "</tr>"
                     rsFetch.MoveNext
