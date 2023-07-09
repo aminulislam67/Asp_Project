@@ -4,7 +4,6 @@
     <title>User Registration</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-
     <style>
         body {
             padding: 20px;
@@ -24,58 +23,54 @@
 <body>
 
 <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-
-        <a class="navbar-brand font-weight-bold" href="#">Student Management System</a>
-        <div class="ml-auto">
-            <button type="button" class="btn btn-info mr-2">Register</button>
-            <button type="button" class="btn btn-success">Login</button>
-
+    <a class="navbar-brand font-weight-bold" href="#">Student Management System</a>
+    <div class="ml-auto">
+        <button type="button" class="btn btn-info mr-2">Register</button>
+        <button type="button" class="btn btn-success">Login</button>
     </div>
 </nav>
 
+<div class="container">
+    <h1>User Registration</h1>
+    <form id="registrationForm" method="post" action="">
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" required pattern="[A-Za-z]+" title="First name should only contain letters.">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" required pattern="[A-Za-z]+" title="Last name should only contain letters.">
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="text" class="form-control" id="phone" name="phone" pattern="[0-9]{11}" title="Phone number should start with +88 and have 11 digits.">
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" required pattern="[A-Za-z0-9]{8,}" title="Password must contain at least 8 characters including letters and numbers.">
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select class="form-control" id="gender" name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Register</button><br>
+        Already have an account?
+        <button type="button" class="btn btn-danger" onclick="location.href='login.asp'">Login Here</button>
+    </form>
+</div>
 
-    <div class="container">
-        <h1>User Registration</h1>
-        <form id="registrationForm" method="post" action="">
-            <div class="form-group">
-                <label for="firstName">First Name:</label>
-                <input type="text" class="form-control" id="firstName" name="firstName" required>
-            </div>
-            <div class="form-group">
-                <label for="lastName">Last Name:</label>
-                <input type="text" class="form-control" id="lastName" name="lastName" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-                <small id="emailError" class="form-text text-danger"></small>
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone:</label>
-                <input type="text" class="form-control" id="phone" name="phone" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <label for="gender">Gender:</label>
-                <select class="form-control" id="gender" name="gender" required>
-                    <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-success">Register</button><br>
-            Already have an account?
-            <button type="button" class="btn btn-danger" onclick="location.href='login.asp'">Login Here</button>
-        </form>
-    </div>
+<script src="js/bootstrap.min.js"></script>
 
-    <script src="js/bootstrap.min.js"></script>
-
-    <%
+<%
     If Request.ServerVariables("REQUEST_METHOD") = "POST" Then
         ' Retrieve form data
         Dim firstName, lastName, email, phone, password, gender
@@ -133,4 +128,3 @@
     End If
     %>
 </body>
-</html>
