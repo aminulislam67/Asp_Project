@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>User Login</title>
-       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             padding: 20px;
@@ -22,34 +22,33 @@
 <body>
 
 <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-
-        <a class="navbar-brand font-weight-bold" href="#">Student Management System</a>
-        <div class="ml-auto">
-            <button type="button" class="btn btn-info mr-2">Register</button>
-            <button type="button" class="btn btn-success">Login</button>
-
+    <a class="navbar-brand font-weight-bold" href="#">Student Management System</a>
+    <div class="ml-auto">
+        <button type="button" class="btn btn-info mr-2">Register</button>
+        <button type="button" class="btn btn-success">Login</button>
     </div>
 </nav>
 
+<div class="container">
+    <h1>User Login</h1>
+    <form id="loginForm" method="post" action="login.asp">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Please provide a valid email address."/>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" required minlength="8" title="Password must have a minimum of 8 characters."/>
+        </div>
+        <button type="submit" class="btn btn-danger">Login</button><br>
+        Don't have an account?
+        <button type="button" class="btn btn-success" onclick="location.href='process_registration.asp'">Register</button>
+    </form>
+</div>
 
-    <div class="container">
-        <h1>User Login</h1>
-        <form id="loginForm" method="post" action="login.asp">
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn btn-danger">Login</button><br>
-            Don't have an account?
-            <button type="button" class="btn btn-success" onclick="location.href='process_registration.asp'">Register</button>
-        </form>
-    </div>
+<script src="js/bootstrap.min.js"></script>
 
-    <script src="js/bootstrap.min.js"></script>
+
 
     <%
     If Request.ServerVariables("REQUEST_METHOD") = "POST" Then
