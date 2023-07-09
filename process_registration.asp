@@ -35,23 +35,23 @@
     <form id="registrationForm" method="post" action="">
         <div class="form-group">
             <label for="firstName">First Name:</label>
-            <input type="text" class="form-control" id="firstName" name="firstName" required pattern="[A-Za-z]+" title="First name should only contain letters.">
+            <input type="text" class="form-control" id="firstName" name="firstName" required pattern="[A-Za-z]+" title="First name should only contain letters."/>
         </div>
         <div class="form-group">
             <label for="lastName">Last Name:</label>
-            <input type="text" class="form-control" id="lastName" name="lastName" required pattern="[A-Za-z]+" title="Last name should only contain letters.">
+            <input type="text" class="form-control" id="lastName" name="lastName" required pattern="[A-Za-z]+" title="Last name should only contain letters."/>
         </div>
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" name="email" required>
+            <input type="email" class="form-control" id="email" name="email" required/>
         </div>
         <div class="form-group">
             <label for="phone">Phone:</label>
-            <input type="text" class="form-control" id="phone" name="phone" pattern="[0-9]{11}" title="Phone number should start with +88 and have 11 digits.">
+            <input type="text" class="form-control" id="phone" name="phone" pattern="[0-9]{11}" title="Phone number should be 11 digits."/>
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" class="form-control" id="password" name="password" required pattern="[A-Za-z0-9]{8,}" title="Password must contain at least 8 characters including letters and numbers.">
+            <input type="password" class="form-control" id="password" name="password" required pattern="[A-Za-z0-9]{8,}" title="Password must contain at least 8 characters including letters and numbers."/>
         </div>
         <div class="form-group">
             <label for="gender">Gender:</label>
@@ -69,6 +69,8 @@
 </div>
 
 <script src="js/bootstrap.min.js"></script>
+
+
 
 <%
     If Request.ServerVariables("REQUEST_METHOD") = "POST" Then
