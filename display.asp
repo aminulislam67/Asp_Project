@@ -26,8 +26,8 @@
 <nav class="navbar navbar-light" style="background-color: #27292b;">
     <a class="navbar-brand font-weight-bold text-white" href="#">Student Management System</a>
     <div class="ml-auto">
-        <button type="button" class="btn btn-info mr-2">Add Student</button>
-        <button type="button" class="btn btn-success">Display</button>
+        <a href="add_student.asp" class="btn btn-info mr-2"><strong>Add Student</strong></a>
+        <a href="display.asp" class="btn btn-success"><strong>Display</strong></a>
     </div>
 </nav>
 
@@ -122,8 +122,8 @@
                     Response.Write "<td>" & rsFetch("Session") & "</td>"
                     Response.Write "<td>" & rsFetch("DateOfBirth") & "</td>"
                     Response.Write "<td>"
-                    Response.Write "<a href=""edit.asp?id=" & rsFetch("ID") & """ class=""btn btn-primary btn-sm mr-2"">Edit</a>"
-                    Response.Write "<a href=""display.asp?deleteid=" & rsFetch("ID") & """ class=""btn btn-danger btn-sm"" onclick=""return confirm('Are you sure you want to delete this student?');"">Delete</a>"
+                    Response.Write "<a href=""edit.asp?id=" & rsFetch("ID") & """ class=""btn btn-primary btn-sm mr-2""><strong>Edit</strong></a>"
+                    Response.Write "<a href=""display.asp?deleteid=" & rsFetch("ID") & """ class=""btn btn-danger btn-sm"" onclick=""return confirm('Are you sure you want to delete this student?');""><strong>Delete</strong></a>"
                     Response.Write "</td>"
                     Response.Write "</tr>"
                     rsFetch.MoveNext
