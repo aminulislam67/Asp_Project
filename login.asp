@@ -93,6 +93,11 @@ If Request.ServerVariables("REQUEST_METHOD") = "POST" Then
     If Not rsLogin.EOF Then
         ' Login successful
         Response.Redirect "display.asp"
+        
+        Set rsLogin = Nothing
+        conn.Close
+        Set conn = Nothing
+        
     Else
         ' Login failed
         Dim strSQLEmailCheck, strSQLPasswordCheck
