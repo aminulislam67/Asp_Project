@@ -115,13 +115,19 @@ If Request.ServerVariables("REQUEST_METHOD") = "POST" Then
         If Not emailCorrect And Not passwordCorrect Then
             ' Both email and password are incorrect
             Response.Write "<h2>Email and password are incorrect.</h2>"
+
         ElseIf Not emailCorrect Then
             ' Email is incorrect
             Response.Write "<h2>Email is incorrect.</h2>"
+ 
         ElseIf Not passwordCorrect Then
             ' Password is incorrect
             Response.Write "<h2>Password is incorrect.</h2>"
+
         End If
+            Set rsLogin = Nothing
+            Set rsEmailCheck = Nothing
+            Set rsPasswordCheck = Nothing
     End If
 
     ' Close the database connection
