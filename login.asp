@@ -49,60 +49,80 @@
 <script src="js/bootstrap.min.js"></script>
 
 
+<%
+If Request.ServerVariables("REQUEST_METHOD") = "POST" Then
+    ' Retrieve form data
+    Dim email, password
+    email = Request.Form("email")
+    password = Request.Form("password")
 
-    <%
-    If Request.ServerVariables("REQUEST_METHOD") = "POST" Then
-        ' Retrieve form data
-        Dim email, password
-        email = Request.Form("email")
-        password = Request.Form("password")
+    ' Path to the Access database file
+    Dim dbPath
+    dbPath = Server.MapPath("crud_db.accdb")
 
-        ' Path to the Access database file
-        Dim dbPath
-        dbPath = Server.MapPath("crud_db.accdb")
+    ' Connection string for Access database
+    Dim connStr
+    connStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & dbPath & ";"
 
-        ' Connection string for Access database
-        Dim connStr
-        connStr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & dbPath & ";"
+    ' Create a new connection object
+    Dim conn
+    Set conn = Server.CreateObject("ADODB.Connection")
 
-        ' Create a new connection object
-        Dim conn
-        Set conn = Server.CreateObject("ADODB.Connection")
+    On Error Resume Next
 
-        On Error Resume Next
+    ' Open the database connection
+    conn.Open connStr
 
-        ' Open the database connection
-        conn.Open connStr
-
-        ' Check for connection errors
-        If Err.Number <> 0 Then
-            Response.Write "An error occurred while connecting to the database."
-            Response.End
-        End If
-
-        On Error Goto 0
-
-        ' Prepare the SQL statement to check the login credentials
-        Dim strSQLLogin
-        strSQLLogin = "SELECT * FROM [users] WHERE [Email] = '" & Replace(email, "'", "''") & "' AND [Password] = '" & Replace(password, "'", "''") & "'"
-
-        ' Execute the SQL select statement
-        Dim rsLogin
-        Set rsLogin = conn.Execute(strSQLLogin)
-
-        ' Check if login is successful
-        If Not rsLogin.EOF Then
-            ' Login successful
-            Response.Write "<h2>Login Successful</h2>"
-        Else
-            ' Login failed
-            Response.Write "<h2>Login Failed</h2>"
-        End If
-
-        ' Close the database connection
-        conn.Close
-        Set conn = Nothing
+    ' Check for connection errors
+    If Err.Number <> 0 Then
+        Response.Write "An error occurred while connecting to the database."
+        Response.End
     End If
-    %>
+
+    On Error Goto 0
+
+    ' Prepare the SQL statement to check the login credentials
+    Dim strSQLLogin
+    strSQLLogin = "SELECT Email, Password FROM [users] WHERE [Email] = '" & Replace(email, "'", "''") & "' AND [Password] = '" & Replace(password, "'", "''") & "'"
+
+    ' Execute the SQL select statement
+    Dim rsLogin
+    Set rsLogin = conn.Execute(strSQLLogin)
+
+    ' Check if login is successful
+    If Not rsLogin.EOF Then
+        ' Login successful
+        Response.Redirect "display.asp"
+    Else
+        ' Login failed
+        Dim strSQLEmailCheck, strSQLPasswordCheck
+        strSQLEmailCheck = "SELECT Email FROM [users] WHERE [Email] = '" & Replace(email, "'", "''") & "'"
+        strSQLPasswordCheck = "SELECT Password FROM [users] WHERE [Password] = '" & Replace(password, "'", "''") & "'"
+
+        Dim rsEmailCheck, rsPasswordCheck
+        Set rsEmailCheck = conn.Execute(strSQLEmailCheck)
+        Set rsPasswordCheck = conn.Execute(strSQLPasswordCheck)
+
+        Dim emailCorrect, passwordCorrect
+        emailCorrect = Not rsEmailCheck.EOF
+        passwordCorrect = Not rsPasswordCheck.EOF
+
+        If Not emailCorrect And Not passwordCorrect Then
+            ' Both email and password are incorrect
+            Response.Write "<h2>Email and password are incorrect.</h2>"
+        ElseIf Not emailCorrect Then
+            ' Email is incorrect
+            Response.Write "<h2>Email is incorrect.</h2>"
+        ElseIf Not passwordCorrect Then
+            ' Password is incorrect
+            Response.Write "<h2>Password is incorrect.</h2>"
+        End If
+    End If
+
+    ' Close the database connection
+    conn.Close
+    Set conn = Nothing
+End If
+%>
 </body>
 </html>
